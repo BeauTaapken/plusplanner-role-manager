@@ -21,7 +21,7 @@ public class RoleController {
     }
 
     @RequestMapping("/read/{userid}")
-    public List<Role> readRoles(@PathVariable("userid") Long userid){
+    public List<Role> readRoles(@PathVariable("userid") String userid){
         return roleRepo.findRolesByUserId(userid);
     }
 

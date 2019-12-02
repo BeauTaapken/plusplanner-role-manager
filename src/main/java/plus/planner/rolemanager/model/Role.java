@@ -19,7 +19,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleid;
     @NotNull
-    private Long userid;
+    private String userid;
     @NotNull
     private Long projectid;
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import plus.planner.rolemanager.model.User;
 import plus.planner.rolemanager.repository.UserRepository;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -19,8 +21,8 @@ public class UserController {
     }
 
     @RequestMapping("/read/{projectid}")
-    public void getUsers(@PathVariable("projectid") Long projectid){
-        userrepo.findUsersByRole(projectid);
+    public List<User> getUsers(@PathVariable("projectid") Long projectid){
+        return userrepo.findUsersByRole(projectid);
     }
 
     @RequestMapping("/update/{user}")
