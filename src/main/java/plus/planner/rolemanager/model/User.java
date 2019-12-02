@@ -27,6 +27,5 @@ public class User {
     private String username;
     @Null
     @JsonIgnore
-    private Long clientid;
-
+    private String clientid;
 }
