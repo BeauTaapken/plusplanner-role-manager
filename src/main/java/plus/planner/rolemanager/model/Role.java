@@ -22,4 +22,6 @@ public class Role {
     private String userid;
     @NotNull
     private Long projectid;
+    @NotNull
+    private String role;
 }

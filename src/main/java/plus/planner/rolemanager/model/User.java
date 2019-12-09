@@ -22,7 +22,7 @@ import javax.validation.constraints.Null;
 public class User {
     @Id
     @NotNull
-    private Long userid;
+    private String userid;
     @NotNull
     private String username;
     @Null
