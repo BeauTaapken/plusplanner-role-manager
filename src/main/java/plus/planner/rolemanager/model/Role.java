@@ -3,8 +3,10 @@ package plus.planner.rolemanager.model;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @Getter
@@ -16,12 +18,8 @@ import javax.validation.constraints.NotNull;
 @EntityListeners(AuditingEntityListener.class)
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roleid;
-    @NotNull
+    private String roleid;
     private String userid;
-    @NotNull
     private Long projectid;
-    @NotNull
     private String role;
 }
