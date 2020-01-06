@@ -7,7 +7,7 @@ import plus.planner.rolemanager.model.Role;
 
 import java.util.List;
 
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, String> {
     @Query("SELECT r FROM Role r where r.userid = :userid")
     List<Role> findRolesByUserId(@Param("userid") String userid);
 }

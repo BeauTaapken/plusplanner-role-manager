@@ -20,6 +20,6 @@ public class Role {
     @Id
     private String roleid;
     private String userid;
-    private Long projectid;
+    private String projectid;
     private String role;
 }
