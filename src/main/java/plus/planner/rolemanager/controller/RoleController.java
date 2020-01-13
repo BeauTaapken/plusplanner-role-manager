@@ -1,5 +1,6 @@
 package plus.planner.rolemanager.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,21 +8,25 @@ import org.springframework.web.bind.annotation.*;
 import plus.planner.rolemanager.model.Role;
 import plus.planner.rolemanager.repository.RoleRepository;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/role")
 public class RoleController {
     private final Logger logger = LoggerFactory.getLogger(RoleController.class);
+    private final ObjectMapper objectMapper;
     private final RoleRepository roleRepo;
 
     @Autowired
-    public RoleController(RoleRepository roleRepo) {
+    public RoleController(ObjectMapper objectMapper, RoleRepository roleRepo) {
+        this.objectMapper = objectMapper;
         this.roleRepo = roleRepo;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public void createRole(@RequestBody Role role) {
+    @PostMapping(value = "/create")
+    public void createRole(@RequestBody String rle) throws IOException {
+        final Role role = objectMapper.readValue(rle, Role.class);
         logger.info("saving role: " + role.getRoleid());
         roleRepo.save(role);
         logger.info("saved role");
