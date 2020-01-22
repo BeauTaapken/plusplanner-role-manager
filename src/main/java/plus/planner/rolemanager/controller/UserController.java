@@ -3,10 +3,7 @@ package plus.planner.rolemanager.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import plus.planner.rolemanager.model.User;
 import plus.planner.rolemanager.repository.UserRepository;
 
@@ -23,14 +20,14 @@ public class UserController {
         this.userrepo = userrepo;
     }
 
-    @RequestMapping("/create")
+    @PostMapping("/create")
     public void createUser(@RequestBody User user) {
         logger.info("saving user: " + user.getUserid());
         userrepo.save(user);
         logger.info("saved user");
     }
 
-    @RequestMapping("/read/{projectid}")
+    @GetMapping("/read/{projectid}")
     public List<User> getUsers(@PathVariable("projectid") String projectid) {
         logger.info("getting users for projectid: " + projectid);
         final List<User> users = userrepo.findUsersByRole(projectid);
@@ -38,14 +35,14 @@ public class UserController {
         return users;
     }
 
-    @RequestMapping("/update")
+    @PostMapping("/update")
     public void updateUser(@RequestBody User user) {
         logger.info("saving user: " + user.getUserid());
         userrepo.save(user);
         logger.info("saved user");
     }
 
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     public void deleteUser(@RequestBody String userid) {
         logger.info("deleting user: " + userid);
         userrepo.deleteById(userid);

@@ -86,31 +86,38 @@ public class rolemanagerApplicationTests {
                 .andExpect(status().is(200));
     }
 
-//    @Test
-//    public void createChatCorrectly() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.post("/chat/create")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(gson.toJson(chat))
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().is(200));
-//    }
-//
-//    @Test
-//    public void updateChatCorrectly() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.post("/chat/update")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(gson.toJson(chat))
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().is(200));
-//    }
-//
-//    @Test
-//    public void deleteChatCorrectly() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.post("/chat/delete")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content("1")
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().is(200));
-//    }
 
+    @Test
+    public void createUserCorrectly() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(gson.toJson(role))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+    }
+
+    @Test
+    public void readUserCorrectly() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/read/1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+    }
+
+    @Test
+    public void updateUserCorrectly() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(gson.toJson(role))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+    }
+
+    @Test
+    public void deleteUserCorrectly() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/delete")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200));
+    }
 }
