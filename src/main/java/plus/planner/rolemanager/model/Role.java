@@ -21,5 +21,5 @@ public class Role {
     private String roleid;
     private String userid;
     private String projectid;
-    private String role;
+    private RoleType role;
 }
