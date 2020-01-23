@@ -1,13 +1,16 @@
 package plus.planner.rolemanager.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import plus.planner.rolemanager.constructor.JsonConstructor;
 import plus.planner.rolemanager.model.User;
 import plus.planner.rolemanager.repository.UserRepository;
 
+import javax.persistence.Tuple;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,19 +20,23 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserRepository userrepo;
     private final ObjectMapper objectMapper;
+    private final JsonConstructor jsonConstructor;
 
     @Autowired
-    public UserController(UserRepository userrepo, ObjectMapper objectMapper) {
+    public UserController(UserRepository userrepo, ObjectMapper objectMapper, JsonConstructor jsonConstructor) {
         this.userrepo = userrepo;
         this.objectMapper = objectMapper;
+        this.jsonConstructor = jsonConstructor;
     }
 
     @RequestMapping("/read/{projectid}")
-    public List<User> getUsers(@PathVariable("projectid") String projectid) {
+    public String getUsers(@PathVariable("projectid") String projectid) throws JsonProcessingException {
         logger.info("getting users for projectid: " + projectid);
-        final List<User> users = userrepo.findUsersByRole(projectid);
+        final List<Tuple> users = userrepo.findUsersByRole(projectid);
+        logger.info("constructing json");
+        final String json = jsonConstructor.constructJson(users);
         logger.info("returning users");
-        return users;
+        return json;
     }
 
     @PostMapping("/save")
