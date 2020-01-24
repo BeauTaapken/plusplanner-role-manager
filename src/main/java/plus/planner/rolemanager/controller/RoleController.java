@@ -32,7 +32,7 @@ public class RoleController {
         logger.info("saved role");
     }
 
-    @RequestMapping(value = "/read/{userid}", method = RequestMethod.GET)
+    @GetMapping(value = "/read/{userid}")
     public List<Role> readRoles(@PathVariable("userid") String userid) {
         logger.info("getting roles for userid: " + userid);
         final List<Role> roles = roleRepo.findRolesByUserId(userid);
@@ -40,14 +40,14 @@ public class RoleController {
         return roles;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping(value = "/update")
     public void updateRole(@RequestBody Role role) {
         logger.info("updating role: " + role.getRoleid());
         roleRepo.save(role);
         logger.info("updating role");
     }
 
-    @RequestMapping("/delete")
+    @PostMapping("/delete/{roleid}")
     public void deleteRole(@PathVariable("roleid") String roleid) {
         logger.info("deleting role: " + roleid);
         roleRepo.deleteById(roleid);
