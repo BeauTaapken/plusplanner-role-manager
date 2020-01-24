@@ -48,8 +48,8 @@ public class RoleController {
         logger.info("updating role");
     }
 
-    @PostMapping("/delete/{roleid}")
-    public void deleteRole(@PathVariable("roleid") String roleid) {
+    @PostMapping("/delete")
+    public void deleteRole(@RequestBody String roleid) {
         logger.info("deleting role: {}", roleid);
         roleRepo.deleteById(roleid);
         logger.info("deleting role");
