@@ -27,29 +27,30 @@ public class RoleController {
     @PostMapping(value = "/create")
     public void createRole(@RequestBody String rle) throws IOException {
         final Role role = objectMapper.readValue(rle, Role.class);
-        logger.info("saving role: " + role.getRoleid());
+        logger.info("saving role: {}", role.getRoleid());
         roleRepo.save(role);
         logger.info("saved role");
     }
 
     @GetMapping(value = "/read/{userid}")
     public List<Role> readRoles(@PathVariable("userid") String userid) {
-        logger.info("getting roles for userid: " + userid);
+        logger.info("getting roles for userid: {}", userid);
         final List<Role> roles = roleRepo.findRolesByUserId(userid);
         logger.info("returning roles");
         return roles;
     }
 
     @PostMapping(value = "/update")
-    public void updateRole(@RequestBody Role role) {
-        logger.info("updating role: " + role.getRoleid());
+    public void updateRole(@RequestBody String rle) throws IOException {
+        final Role role = objectMapper.readValue(rle, Role.class);
+        logger.info("updating role: {}", role.getRoleid());
         roleRepo.save(role);
         logger.info("updating role");
     }
 
     @PostMapping("/delete/{roleid}")
     public void deleteRole(@PathVariable("roleid") String roleid) {
-        logger.info("deleting role: " + roleid);
+        logger.info("deleting role: {}", roleid);
         roleRepo.deleteById(roleid);
         logger.info("deleting role");
     }
