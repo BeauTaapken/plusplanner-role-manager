@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import plus.planner.rolemanager.model.Role;
+import plus.planner.rolemanager.model.RoleType;
 import plus.planner.rolemanager.model.User;
 
 import javax.ws.rs.core.MediaType;
@@ -30,7 +31,7 @@ public class rolemanagerApplicationTests {
 
     private MockMvc mockMvc;
 
-    private final Role role = new Role("1", "1", "1", "test");
+    private final Role role = new Role("1", "1", "1", RoleType.GUEST);
 
     private final User user = new User("1", "test", "testimg");
 
@@ -46,10 +47,10 @@ public class rolemanagerApplicationTests {
                 .content(gson.toJson(role))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
+        
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/save")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(gson.toJson(user))
+                .content(gson.toJson(role))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));
     }
@@ -81,17 +82,9 @@ public class rolemanagerApplicationTests {
 
     @Test
     public void deleteRoleCorrectly() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/role/delete/1")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().is(200));
-    }
-
-
-    @Test
-    public void createUserCorrectly() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
+        mockMvc.perform(MockMvcRequestBuilders.post("/role/delete")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(gson.toJson(role))
+                .content("1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));
     }
@@ -104,8 +97,8 @@ public class rolemanagerApplicationTests {
     }
 
     @Test
-    public void updateUserCorrectly() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/update")
+    public void saveUserCorrectly() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/save")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(gson.toJson(role))
                 .accept(MediaType.APPLICATION_JSON))
