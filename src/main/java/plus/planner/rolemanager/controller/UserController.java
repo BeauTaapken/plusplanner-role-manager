@@ -39,6 +39,14 @@ public class UserController {
         return json;
     }
 
+    @GetMapping("/read")
+    public List<User> getUsers() {
+        logger.info("getting all users");
+        final List<User> users = userRepo.findAll();
+        logger.info("returning users");
+        return users;
+    }
+
     @PostMapping("/save")
     public void updateUser(@RequestBody String usr) throws IOException {
         final User user = objectMapper.readValue(usr, User.class);
