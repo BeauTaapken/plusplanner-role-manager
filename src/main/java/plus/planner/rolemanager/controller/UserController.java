@@ -14,6 +14,7 @@ import javax.persistence.Tuple;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
